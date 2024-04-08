@@ -4,23 +4,23 @@
             <div class="fields-container">
                 <div class="form-field">
                     <label for="first_name">Имя</label>
-                    <input type="text" name="first_name" id="first_name">
+                    <input type="text" name="first_name" id="first_name" v-model="user.first_name">
                 </div>
                 <div class="form-field">
                     <label for="last_name">Фамилия</label>
-                    <input type="text" name="last_name" id="last_name">
+                    <input type="text" name="last_name" id="last_name" v-model="user.last_name">
                 </div>
                 <div class="form-field">
                     <label for="email">Электронная почта</label>
-                    <input type="email" name="email" id="email" v-model="email" required>
+                    <input type="email" name="email" id="email" v-model="user.email" required autocomplete="email">
                 </div>
                 <div class="form-field">
                     <label for="password">Пароль</label>
-                    <input type="password" name="password" id="password" v-model="password" required>
+                    <input type="password" name="password" id="password" v-model="user.password" @input="checkPasswords" required autocomplete="new-password">
                 </div>
                 <div class="form-field">
                     <label for="password">Повторите пароль</label>
-                    <input type="password" name="repeat-password" id="repeat-password" v-model="password" required>
+                    <input type="password" name="repeat-password" id="repeat-password" v-model="repeated_password" @input="checkPasswords" required autocomplete="new-password">
                 </div>
                 <input type="submit" value="Зарегистрироваться" class="default-button">
             </div>
@@ -29,16 +29,35 @@
 </template>
 
 <script>
+import User from '@/models/user';
+
 export default {
     data() {
         return {
-            email: "",
-            password: ""
+            user: new User('', ''),
+            repeated_password: '',
         }
     },
     methods: {
         onSubmit() {
-            console.log(this.email, this.password)
+            this.$store.dispatch('auth/register', this.user).then(
+                () => {
+                    this.$router.push('/login');
+                },
+                error => {
+                    console.log(error)
+                }
+            )
+        },
+        checkPasswords() {
+            const repeatPasswordInput = document.querySelector('#repeat-password')
+            if (this.repeated_password != this.user.password) {
+                repeatPasswordInput.setCustomValidity('Пароли не совпадают')
+            }
+            else {
+                console.log(2)
+                repeatPasswordInput.setCustomValidity('')
+            }
         }
     },
 }

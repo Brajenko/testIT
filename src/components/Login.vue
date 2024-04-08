@@ -4,11 +4,11 @@
             <div class="fields-container">
                 <div class="form-field">
                     <label for="email">Электронная почта</label>
-                    <input type="email" name="email" id="email" v-model="user.email" required>
+                    <input type="email" name="email" id="email" v-model="user.email" required autocomplete="on">
                 </div>
                 <div class="form-field">
                     <label for="password">Пароль</label>
-                    <input type="password" name="password" id="password" v-model="user.password" required>
+                    <input type="password" name="password" id="password" v-model="user.password" required autocomplete="on">
                 </div>
                 <input type="submit" value="Войти" class="default-button">
             </div>
