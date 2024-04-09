@@ -5,14 +5,13 @@
 </template>
 
 <script>
-import { auth } from '@/store/auth.module';
 
 export default {
     components: {
 },
     data() {
         return {
-            user: auth.state.user
+            user: JSON.parse(localStorage.getItem("user"))
         }
     },
     methods: {

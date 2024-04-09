@@ -30,6 +30,7 @@
 
 <script>
 import User from '@/models/user';
+import AuthService from "@/services/auth.service";
 
 export default {
     data() {
@@ -40,14 +41,14 @@ export default {
     },
     methods: {
         onSubmit() {
-            this.$store.dispatch('auth/register', this.user).then(
-                () => {
-                    this.$router.push('/login');
-                },
-                error => {
-                    console.log(error)
-                }
-            )
+            AuthService.register(this.user).then(
+            (response) => {
+                console.log(response);
+                this.$router.push('/login');
+            },
+            (error) => {
+                console.log(error);
+            })
         },
         checkPasswords() {
             const repeatPasswordInput = document.querySelector('#repeat-password')
@@ -55,7 +56,6 @@ export default {
                 repeatPasswordInput.setCustomValidity('Пароли не совпадают')
             }
             else {
-                console.log(2)
                 repeatPasswordInput.setCustomValidity('')
             }
         }

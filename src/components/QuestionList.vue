@@ -15,12 +15,13 @@ export default {
     },
     props: {
         typed_questions: {
-            type: Map,
+            type: Object,
             default: {},
             required: true
         },
     },
     data() {
+        console.log(this.typed_questions)
         let questions = [];
         for (const qtype of ['text', 'code', 'check', 'radio']) {
             console.log(this.typed_questions[qtype + '_questions']);

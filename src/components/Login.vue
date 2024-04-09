@@ -8,7 +8,8 @@
                 </div>
                 <div class="form-field">
                     <label for="password">Пароль</label>
-                    <input type="password" name="password" id="password" v-model="user.password" required autocomplete="on">
+                    <input type="password" name="password" id="password" v-model="user.password" required
+                        autocomplete="on">
                 </div>
                 <input type="submit" value="Войти" class="default-button">
             </div>
@@ -18,6 +19,8 @@
 
 <script>
 import User from '@/models/user';
+import AuthService from "@/services/auth.service";
+
 export default {
     data() {
         return {
@@ -26,12 +29,14 @@ export default {
     },
     methods: {
         onSubmit() {
-            this.$store.dispatch('auth/login', this.user).then(
-                () => {
+            AuthService.login(this.user).then(
+                (user) => {
+                    console.log(user);
+                    localStorage.setItem('user', JSON.stringify(user))
                     this.$router.push('/');
                 },
-                error => {
-                    console.log(error)
+                (error) => {
+                    console.log(error);
                 }
             )
         }

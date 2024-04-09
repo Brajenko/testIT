@@ -1,30 +1,38 @@
 <template>
     <div>
-        <p>User: {{ user.email }}</p>
-        <question-list :typed_questions='questions' @test-submit="onSubmit"/>    
+        <p>User: {{ user.email }}   Test: {{ this.$route.params.test_uuid }}</p>
+        <question-list :typed_questions='questions' @test-submit="onSubmit" />
     </div>
 </template>
 
 <script>
 import QuestionList from '@/components/QuestionList.vue';
 import testsService from '@/services/tests.service';
-import { auth } from '@/store/auth.module';
 
 export default {
     components: {
-    QuestionList,
-},
+        QuestionList,
+    },
     data() {
-        testsService.getTest(this.$route.params.test_uuid)
-        .then((response) => {
-            const questions = response;
-        })
-        .catch(alert)
-        console.log(questions | 1);
         return {
-            questions: questions,
-            user: auth.state.user
+            user: JSON.parse(localStorage.getItem('user')),
+            questions: {
+                'text_questions': [],
+                'radio_questions': [],
+                'code_questions': [],
+                'check_questions': [],
+            }
         }
+    },
+    mounted: function() {
+        testsService.getTest(this.$route.params.test_uuid)
+            .then((questions) => {
+                this.questions = questions;
+                console.log(this.questions)
+            })
+            .catch((alert) => {
+                console.log(alert);
+            })
     },
     methods: {
         onSubmit(data) {

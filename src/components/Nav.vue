@@ -3,6 +3,7 @@
         <li><router-link to="/">Home</router-link></li>
         <li><router-link to="/login">Login</router-link></li>
         <li><router-link to="/register">Register</router-link></li>
+        <li><router-link to="/logout">Logout</router-link></li>
     </ul>
 </template>
 
@@ -33,6 +34,5 @@ a {
     text-decoration: none;
     color: black;
     font-size: x-large;
-
 }
 </style>
