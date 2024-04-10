@@ -14,27 +14,16 @@ export default {
         Question,
     },
     props: {
-        typed_questions: {
-            type: Object,
-            default: {},
+        questions: {
+            type: Array,
+            default: [],
             required: true
         },
     },
     data() {
-        console.log(this.typed_questions)
-        let questions = [];
-        for (const qtype of ['text', 'code', 'check', 'radio']) {
-            console.log(this.typed_questions[qtype + '_questions']);
-            this.typed_questions[qtype + '_questions'].forEach(question => {
-                question.qtype = qtype;
-                questions.push(question);
-            });
-        }
-        questions.sort((q1, q2) => (q1.number_in_test - q2.number_in_test));
-        let answers = {};
         return {
-            answers: answers,
-            questions: questions
+            answers: {},
+            questions: this.questions
         }
     },
     methods: {

@@ -1,7 +1,8 @@
 <template>
     <div>
-        <p>User: {{ user.email }}   Test: {{ this.$route.params.test_uuid }}</p>
-        <question-list :typed_questions='questions' @test-submit="onSubmit" />
+        <p>User: {{ user.email }}</p>
+        <p>Test: {{ this.$route.params.test_uuid }}</p>
+        <question-list :questions='questions' @test-submit="onSubmit" />
     </div>
 </template>
 
@@ -16,19 +17,19 @@ export default {
     data() {
         return {
             user: JSON.parse(localStorage.getItem('user')),
-            questions: {
-                'text_questions': [],
-                'radio_questions': [],
-                'code_questions': [],
-                'check_questions': [],
-            }
+            questions: [],
         }
     },
-    mounted: function() {
+    mounted: function () {
         testsService.getTest(this.$route.params.test_uuid)
             .then((questions) => {
-                this.questions = questions;
-                console.log(this.questions)
+                for (const qtype of ['text', 'code', 'check', 'radio']) {
+                    questions[qtype + '_questions'].forEach(question => {
+                        question.qtype = qtype;
+                        this.questions.push(question);
+                    });
+                }
+                this.questions.sort((q1, q2) => (q1.number_in_test - q2.number_in_test));
             })
             .catch((alert) => {
                 console.log(alert);
