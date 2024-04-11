@@ -18,6 +18,12 @@ export default {
         return {
             user: JSON.parse(localStorage.getItem('user')),
             questions: [],
+            answers: {
+                text_answers: [],
+                radio_answers: [],
+                check_answers: [],
+                code_answers: []
+            },
         }
     },
     mounted: function () {
@@ -26,6 +32,7 @@ export default {
                 for (const qtype of ['text', 'code', 'check', 'radio']) {
                     questions[qtype + '_questions'].forEach(question => {
                         question.qtype = qtype;
+                        question.qid = qtype + question.id;
                         this.questions.push(question);
                     });
                 }
@@ -36,8 +43,48 @@ export default {
             })
     },
     methods: {
-        onSubmit(data) {
-            console.log(data, 'sended to server')
+        resetAnswers() {
+            this.answers = {
+                text_answers: [],
+                radio_answers: [],
+                check_answers: [],
+                code_answers: []
+            }
+        },
+        onSubmit(answers) {
+            this.resetAnswers();
+            for (const ans of answers) {
+                var qtype, id;
+                [qtype, id] = [ans.qid.slice(0, -1), ans.qid.slice(-1)];
+                switch (qtype) {
+                    case 'text':
+                        this.answers.text_answers.push({
+                            "answer": ans.answer,
+                            "question": Number(id)
+                        });
+                        break;
+                    case 'code':
+                        this.answers.code_answers.push({
+                            "code": ans.answer,
+                            "question": Number(id)
+                        });
+                        break;
+                    case 'radio':
+                        this.answers.radio_answers.push({
+                            "answer": ans.answer,
+                            "question": Number(id)
+                        });
+                        break;
+                    case 'check':
+                        this.answers.check_answers.push({
+                            "answers": ans.answer,
+                            "question": Number(id)
+                        });
+                        break;
+                }
+            }
+            console.log(this.answers);
+            testsService.sendAnswers(this.$route.params.test_uuid, this.answers);
         }
     },
 }

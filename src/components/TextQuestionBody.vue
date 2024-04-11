@@ -10,10 +10,6 @@ export default {
         }
     },
     props: {
-        qid: {
-            type: Number,
-            required: true,
-        },
     },
     methods: {
         onChange() {

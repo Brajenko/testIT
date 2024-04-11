@@ -1,6 +1,6 @@
 <template>
     <div class="questions">
-        <question :id="question.id" :title="question.title" :description="question.description" :qtype="question.qtype"
+        <question :qid="question.qid" :title="question.title" :description="question.description" :qtype="question.qtype"
             :variants="question.variants" @answer-change="onAnswerChange" v-for="question in questions" />
     </div>
     <button class="default-button" @click="sendAnswers">Отправить ответы</button>
@@ -22,18 +22,17 @@ export default {
     },
     data() {
         return {
-            answers: {},
-            questions: this.questions
+            answers: {}
         }
     },
     methods: {
-        onAnswerChange(answer, id) {
-            this.answers[id] = answer;
+        onAnswerChange(answer, qid) {
+            this.answers[qid] = answer;
         },
         sendAnswers() {
             let data = [];
             for (const ans of Object.entries(this.answers)) {
-                data.push({ id: ans[0], answer: ans[1] });
+                data.push({ qid: ans[0], answer: ans[1] });
             }
             this.$emit('test-submit', data)
         }

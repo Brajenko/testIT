@@ -25,8 +25,8 @@ export default {
         CheckQuestionBody
     },
     props: {
-        id: {
-            type: Number,
+        qid: {
+            type: String,
             required: true
         },
         title: {
@@ -49,7 +49,7 @@ export default {
     },
     methods: {
         onAnswerChange(answer) {
-            this.$emit('answer-change', answer, this.id)
+            this.$emit('answer-change', answer, this.qid)
         }
     },
 }
