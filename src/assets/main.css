@@ -1,0 +1,64 @@
+.default-button {
+  width: fit-content;
+  background-color: grey;
+  color: white;
+  padding: 0.4em 0.9em;
+  border: none;
+  border-radius: 3px;
+  font-size: large;
+  cursor: pointer;
+}
+
+.default-button:hover {
+  background-color: darkgrey;
+}
+
+.default-button:active {
+  background-color: grey;
+}
+
+.small-button {
+  width: fit-content;
+  height: 30px;
+  background-color: lightblue;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.small-button:hover {
+  background-color: dodgerblue;
+}
+.small-button:active {
+  background-color: royalblue;
+}
+
+body {
+  font-size: 25px;
+}
+
+h1 {
+  font-size: 45px;
+}
+
+h2 {
+  font-size: 35px;
+}
+
+h3 {
+  font-size: 30px;
+}
+
+a {
+  color: dodgerblue;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:visited {
+  color: dodgerblue;
+}
