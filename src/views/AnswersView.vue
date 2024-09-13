@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1>Тест <RouterLink :to="{ name: 'test', params: { id: test.id } }">{{ test.name }}</RouterLink></h1>
+    <h1>
+      Тест <RouterLink :to="{ name: 'test', params: { id: test.id } }">{{ test.name }}</RouterLink>
+    </h1>
     <h1>
       Прохождение пользователя
       <router-link :to="{ name: 'user', params: { id: completion.user.id } }">
@@ -23,13 +25,13 @@ export default {
   },
   data() {
     return {
-      completion: { score: 0, user: {id: 0} } as unknown as Components.Schemas.Completion,
+      completion: { score: 0, user: { id: 0 } } as unknown as Components.Schemas.Completion,
       test: {} as unknown as Components.Schemas.Test
     }
   },
   created() {
     // TODO: get completions depends on user type
-    client.completions_with_correctness_retrieve  (Number(this.$route.params.id)).then(
+    client.completions_with_correctness_retrieve(Number(this.$route.params.id)).then(
       (response) => {
         this.completion = response.data
         client.tests_retrieve(this.completion.test).then(

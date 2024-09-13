@@ -9,9 +9,8 @@
         >:
         <span v-for="member in group.members" :key="member.id">
           <router-link :to="{ name: 'user', params: { id: member.id } }">
-            {{ member.first_name + ' ' + member.last_name }}
-          </router-link>,
-          &nbsp;
+            {{ member.first_name + ' ' + member.last_name }} </router-link
+          >, &nbsp;
         </span>
       </div>
     </div>

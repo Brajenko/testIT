@@ -7,7 +7,7 @@
       <h2>Участники:</h2>
       <div v-for="member in group.members" :key="member.id">
         <li>
-          <router-link :to="{ name: 'user', params: {id: member.id} }">{{
+          <router-link :to="{ name: 'user', params: { id: member.id } }">{{
             member.first_name + ' ' + member.last_name
           }}</router-link>
           &nbsp;&nbsp;
@@ -19,7 +19,11 @@
         <b>Добавить: </b>
         <input type="text" list="users" v-model="userToAdd" />
         <datalist id="users">
-          <option v-for="user in users.filter(user => !group.members.some(u => u.id == user.id))" :key="user.id" :value="user.email">
+          <option
+            v-for="user in users.filter((user) => !group.members.some((u) => u.id == user.id))"
+            :key="user.id"
+            :value="user.email"
+          >
             {{ user.first_name + ' ' + user.last_name }}
           </option>
         </datalist>

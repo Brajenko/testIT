@@ -2,9 +2,7 @@
   <div>
     <div v-if="!user">
       <p>Current user: Guest</p>
-      <button @click="$router.push({ name: 'login' })" class="default-button">
-        Войти
-      </button>
+      <button @click="$router.push({ name: 'login' })" class="default-button">Войти</button>
     </div>
     <div v-else>
       <h1>{{ user.organization.name }}</h1>

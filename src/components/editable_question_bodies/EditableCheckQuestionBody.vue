@@ -1,34 +1,21 @@
 <template>
   <div class="variants">
     <div v-for="(variant, index) in body.variants" :key="index" class="variant">
-      <label
-        contenteditable
-        @input="
-          variant.text = ($event.target as HTMLElement).innerText;
-          $emit('update:modelValue', body)
-        "
-      >
+      <label contenteditable @input="
+        variant.text = ($event.target as HTMLElement).innerText;
+      $emit('update:modelValue', body)
+        ">
         {{ variant.text }}
       </label>
-      <input
-        :checked="variant.is_correct"
-        type="checkbox"
-        :value="variant.text"
-        name="variants"
-        @change="changeCorrectVariant($event, index)"
-      />
+      <input :checked="variant.is_correct" type="checkbox" :value="variant.text" name="variants"
+        @change="changeCorrectVariant($event, index)" />
     </div>
   </div>
   <button @click.prevent="addVariant">+</button>
-  <br>
-  <br>
-  <label class="is_strict_score"
-    >Строгое оценивание:
-    <input
-      type="checkbox"
-      v-model="body.strict_score"
-      @change="$emit('update:modelValue', body)"
-    />
+  <br />
+  <br />
+  <label class="is_strict_score">Строгое оценивание:
+    <input type="checkbox" v-model="body.strict_score" @change="$emit('update:modelValue', body)" />
   </label>
 </template>
 
@@ -55,7 +42,7 @@ export default {
       // @ts-expect-error cant be undefined
       this.body.variants.push({
         // @ts-expect-error cant be undefined
-        text: 'Вариант ' + (this.body.variants.length + 1 ?? 1),
+        text: 'Вариант ' + (this.body.variants.length + 1),
         is_correct: false
       })
       this.$emit('update:modelValue', this.body)

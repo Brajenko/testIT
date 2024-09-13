@@ -97,7 +97,7 @@ export default {
     onSubmit() {
       client.users_create(null, this.user).then(
         () => {
-          router.push({name: 'login', query: this.$route.query})
+          router.push({ name: 'login', query: this.$route.query })
         },
         (error) => {
           console.log(error)

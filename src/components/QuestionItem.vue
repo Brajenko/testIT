@@ -3,7 +3,6 @@
     <div class="first-row__question">
       <div class="quill-input">
         <QuillComponent
-        
           :modelValue="question.text"
           placeholder="Введите текст вопроса..."
           readonly
@@ -12,14 +11,13 @@
       <div class="points">{{ question.points }} б.</div>
     </div>
     <div class="question-body">
-      
       <CodeQuestionBody v-if="question.type === 'code'" v-model="answerBody"></CodeQuestionBody>
       <CheckQuestionBody
-          v-else-if="question.type === 'check'"
-          v-model="answerBody"
-          :variants="question.body.variants"
-        >
-        </CheckQuestionBody>
+        v-else-if="question.type === 'check'"
+        v-model="answerBody"
+        :variants="question.body.variants"
+      >
+      </CheckQuestionBody>
       <TextQuestionBody
         v-else-if="question.type === 'text'"
         v-model="answerBody"

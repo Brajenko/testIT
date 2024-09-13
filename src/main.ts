@@ -34,7 +34,6 @@ import 'katex/dist/katex.css'
 import '@vueup/vue-quill/dist/vue-quill.bubble.css'
 import '@vueup/vue-quill/dist/vue-quill.snow.css'
 import 'mathquill4quill/mathquill4quill.css'
-import "quill-paste-smart";
-
+import 'quill-paste-smart'
 
 app.mount('#app')

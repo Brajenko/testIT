@@ -107,7 +107,7 @@ export default {
         check: {
           variants: [
             { text: 'Вариант 1', is_correct: true },
-            { text: 'Вариант 2', is_correct: false },
+            { text: 'Вариант 2', is_correct: false }
           ],
           strict_score: false
         },

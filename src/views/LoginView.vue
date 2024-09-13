@@ -29,7 +29,8 @@
     </form>
     <div>
       <p>
-        Еще нет аккаунта? <router-link :to="{ name: 'register', query: $route.query }">Зарегистрируйтесь</router-link>
+        Еще нет аккаунта?
+        <router-link :to="{ name: 'register', query: $route.query }">Зарегистрируйтесь</router-link>
       </p>
     </div>
   </div>
@@ -38,6 +39,7 @@
 <script lang="ts">
 import { useAuthStore } from '@/stores/auth.store'
 import router from '@/helpers/router'
+import type { LocationQueryValue } from 'vue-router'
 
 export default {
   data() {
@@ -52,7 +54,7 @@ export default {
     async onSubmit() {
       // wait for store to save our user
       await useAuthStore().login(this.user.email, this.user.password)
-      router.push(this.$route.query.redirect || '/')
+      router.push((this.$route.query.redirect as LocationQueryValue) || '/')
     }
   }
 }
